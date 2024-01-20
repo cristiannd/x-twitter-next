@@ -13,6 +13,12 @@ export default async function Home() {
     redirect("/login");
   }
 
+  const { data: posts } = await supabase
+    .from("posts")
+    .select("*, users(*)");
+
+    console.log(posts)
+
   return (
     <main>
       <AuthButtonServer />
