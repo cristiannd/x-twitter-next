@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 import { AuthButtonServer } from "./components/auth-button-server";
 import { redirect } from "next/navigation";
 import { PostLists } from "./components/posts-list";
-import { Post } from "./types/database";
+import { type Post } from "./types/database";
+import { ComposePost } from "./components/compose-post";
 
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
@@ -17,16 +18,20 @@ export default async function Home() {
 
   const response = await supabase
     .from("posts")
-    .select("*, user:users(*)");
+    .select("*, user:users(*)")
+    .order("created_at", { ascending: false });
 
-  const posts: Post[] = response.data ?? []
+  console.log(response);
+
+  const posts: Post[] = response.data ?? [];
 
   return (
     <main className="flex min-h-screen felx-col items-center justify-between">
-      <section className="max-w-[600px] min-w-[400px] mx-auto border-l border-r border-white/50 min-h-screen">
-        <AuthButtonServer />
+      <section className="max-w-[600px] w-full mx-auto border-l border-r border-white/50 min-h-screen">
+        <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostLists posts={posts} />
       </section>
+      <AuthButtonServer />
     </main>
   );
 }
