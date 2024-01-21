@@ -11,21 +11,18 @@ import {
 import { IconHeart, IconMessageCircle, IconRepeat } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
+import { Post } from "../types/database";
 
-interface User {
-  userFullName: string;
-  userName: string;
-  avatarUrl: string;
-  content: string;
-}
-
-export default function PostCard({
-  userFullName,
-  userName,
-  avatarUrl,
-  content,
-}: User) {
+export default function PostCard({ user, content }: Post) {
   const [isFollowed, setIsFollowed] = useState(false);
+
+  const {
+    raw_user_meta_data: {
+      full_name: fullName,
+      user_name: userName,
+      avatar_url: avatarUrl,
+    },
+  } = user;
 
   return (
     <Card className="bg-transparent shadow-none hover:bg-slate-800 transition border-b rounded-none border-white/20 cursor-pointer">
@@ -36,7 +33,7 @@ export default function PostCard({
           </Link>
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-small font-semibold leading-none text-default-600">
-              {userFullName}
+              {fullName}
             </h4>
             <h5 className="text-small tracking-tight text-default-400">
               @{userName}

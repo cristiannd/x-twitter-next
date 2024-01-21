@@ -18,8 +18,6 @@ export default async function Home() {
     .from("posts")
     .select("*, user:users(*)");
 
-  console.log(posts);
-
   return (
     <main className="flex min-h-screen felx-col items-center justify-between">
       <section className="max-w-[600px] min-w-[400px] mx-auto border-l border-r border-white/50 min-h-screen">
