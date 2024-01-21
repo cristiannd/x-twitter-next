@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { AuthButtonServer } from "./components/auth-button-server";
 import { redirect } from "next/navigation";
 import { PostLists } from "./components/posts-list";
+import { Post } from "./types/database";
 
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
@@ -14,9 +15,11 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const { data: posts } = await supabase
+  const response = await supabase
     .from("posts")
     .select("*, user:users(*)");
+
+  const posts: Post[] = response.data ?? []
 
   return (
     <main className="flex min-h-screen felx-col items-center justify-between">
