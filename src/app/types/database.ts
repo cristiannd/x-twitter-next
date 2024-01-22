@@ -12,5 +12,6 @@ export interface User {
 export interface Post {
   id: string,
   content: string;
-  user: User
+  user: User;
+  created_at: string;
 }

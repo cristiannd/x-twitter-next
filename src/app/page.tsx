@@ -21,8 +21,6 @@ export default async function Home() {
     .select("*, user:users(*)")
     .order("created_at", { ascending: false });
 
-  console.log(response);
-
   const posts: Post[] = response.data ?? [];
 
   return (
