@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark max-w-[600px] w-full mx-auto">
       <body>
         <Providers>{children}</Providers>
       </body>

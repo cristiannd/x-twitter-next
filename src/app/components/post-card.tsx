@@ -27,8 +27,7 @@ export default function PostCard({
     },
   } = user;
 
-  // const pathname = usePathname()
-  // console.log(pathname)
+  const pathname = usePathname();
 
   const dateFormatter = (date: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -40,12 +39,11 @@ export default function PostCard({
     };
 
     const newDate = new Date(date);
-
     return newDate.toLocaleDateString("es-ES", options);
   };
 
   return (
-    <Card className="bg-transparent shadow-none hover:bg-slate-800 transition border-b rounded-none border-white/20">
+    <Card className="bg-transparent shadow-none border-b rounded-none border-white/20">
       <CardHeader className="justify-between">
         <div className="flex gap-x-2">
           <Link href={`/${userName}`}>
@@ -59,9 +57,11 @@ export default function PostCard({
               <h5 className="text-small tracking-tight text-default-400">
                 @{userName}
               </h5>
-              <h5 className="cursor-pointer text-small tracking-tight text-default-400">
-                {dateFormatter(createdAt)}
-              </h5>
+              <Link href={pathname + id}>
+                <h5 className="cursor-pointer hover:text-white transition text-small tracking-tight text-default-400">
+                  {dateFormatter(createdAt)}
+                </h5>
+              </Link>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ export function ComposePost({ userAvatarUrl }: { userAvatarUrl: string }) {
   return (
     <form
       action={addPost}
-      className="flex flex-row space-x-4 p-4 border-white/20 border-b"
+      className="flex flex-row space-x-4 p-4 border-white/30 border-y"
     >
       <Avatar radius="full" size="md" src={userAvatarUrl} />
 

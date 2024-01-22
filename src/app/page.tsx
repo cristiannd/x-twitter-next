@@ -24,12 +24,12 @@ export default async function Home() {
   const posts: Post[] = response.data ?? [];
 
   return (
-    <main className="flex min-h-screen felx-col items-center justify-between">
+    <main className="flex flex-col min-h-screen felx-col items-center justify-between my-2 gap-2">
+      <AuthButtonServer />
       <section className="max-w-[600px] w-full mx-auto border-l border-r border-white/50 min-h-screen">
         <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostLists posts={posts} />
       </section>
-      <AuthButtonServer />
     </main>
   );
 }
