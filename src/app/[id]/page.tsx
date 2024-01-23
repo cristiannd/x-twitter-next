@@ -15,9 +15,9 @@ export default async function Post({ params }: { params: Params }) {
     .select(`*, user:users(*)`)
     .eq("id", postId);
 
-  console.log(post)
+  console.log(post);
 
-  if (!post.data) throw new Error('Error');
+  if (!post.data) throw new Error("Error");
 
   const { id, created_at, content, user } = post.data[0];
 

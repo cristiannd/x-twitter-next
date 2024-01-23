@@ -1,22 +1,21 @@
-"use client";
-
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Avatar,
-  Button,
 } from "@nextui-org/react";
 import { IconHeart, IconMessageCircle, IconRepeat } from "@tabler/icons-react";
 import Link from "next/link";
 import { Post } from "../types/database";
-import { usePathname } from "next/navigation";
+import { DeleteButtonPost } from "./delete-button-post";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-export default function PostCard({
+export default async function PostCard({
   user,
   content,
-  id,
+  id: postId,
   created_at: createdAt,
 }: Post) {
   const {
@@ -26,8 +25,13 @@ export default function PostCard({
       avatar_url: avatarUrl,
     },
   } = user;
-
-  const pathname = usePathname();
+  const supabase = createServerComponentClient({ cookies });
+  const {
+    data: {
+      user: sessionUser,
+    },
+  } = await supabase.auth.getUser();
+  console.log(sessionUser?.id);
 
   const dateFormatter = (date: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -57,7 +61,7 @@ export default function PostCard({
               <h5 className="text-small tracking-tight text-default-400">
                 @{userName}
               </h5>
-              <Link href={pathname + id}>
+              <Link href={"/" + postId}>
                 <h5 className="cursor-pointer hover:text-white transition text-small tracking-tight text-default-400">
                   {dateFormatter(createdAt)}
                 </h5>
@@ -65,6 +69,13 @@ export default function PostCard({
             </div>
           </div>
         </div>
+
+        {
+          sessionUser?.id === user.id
+            ? <DeleteButtonPost postId={postId} />
+            : ''
+        }
+        
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-white">
         <p>{content}</p>

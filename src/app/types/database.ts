@@ -1,4 +1,5 @@
 export interface User {
+  id: string;
   userFullName: string;
   userName: string;
   avatarUrl: string;
@@ -6,11 +7,11 @@ export interface User {
     full_name: string;
     user_name: string;
     avatar_url: string;
-  }
+  };
 }
 
 export interface Post {
-  id: string,
+  id: string;
   content: string;
   user: User;
   created_at: string;
