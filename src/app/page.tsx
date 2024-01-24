@@ -17,8 +17,7 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const response = await getPosts()
-  const posts: Post[] = response.data ?? [];
+  const posts = await getPosts()
 
   return (
     <main className="flex flex-col min-h-screen felx-col items-center justify-between my-2 gap-2">
