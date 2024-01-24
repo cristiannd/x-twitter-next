@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { PostLists } from "./components/posts-list";
 import { type Post } from "./types/database";
 import { ComposePost } from "./components/compose-post";
+import { getPosts } from "./actions/post.actions";
 
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
@@ -16,11 +17,7 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const response = await supabase
-    .from("posts")
-    .select("*, user:users(*)")
-    .order("created_at", { ascending: false });
-
+  const response = await getPosts()
   const posts: Post[] = response.data ?? [];
 
   return (
