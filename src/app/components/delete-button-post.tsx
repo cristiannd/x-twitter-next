@@ -26,12 +26,12 @@ export function DeleteButtonPost({ postId }: { postId: string }) {
         onOpenChange={(open) => setIsOpen(open)}
       >
         <PopoverTrigger>
-          <Button className="text-gray-400 hover:text-white cursor-pointer bg-transparent w-fit m-0 p-0">
+          <Button className="text-gray-400 hover:text-white cursor-pointer bg-transparent">
             <IconTrash />
           </Button>
         </PopoverTrigger>
         <form action={() => deleteHandler(postId)}>
-          <PopoverContent>
+          <PopoverContent className="bg-red-500">
             <button type="submit" className="px-1 py-1">
               <div className="text-small font-bold">Delete post</div>
               <div className="text-tiny">This action is permanent</div>
