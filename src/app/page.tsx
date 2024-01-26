@@ -17,12 +17,12 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const posts = await getPosts()
+  const posts = await getPosts();
 
   return (
-    <main className="flex flex-col min-h-screen felx-col items-center justify-between my-2 gap-2">
+    <main className="felx-col my-2 flex min-h-screen flex-col items-center justify-between gap-2">
       <AuthButtonServer />
-      <section className="max-w-[600px] w-full mx-auto border-l border-r border-white/50 min-h-screen">
+      <section className="mx-auto min-h-screen w-full max-w-[600px] border-l border-r border-white/50">
         <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostLists posts={posts} />
       </section>
