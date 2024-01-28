@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import NavLinks from "./components/nav-links";
 
 export const metadata: Metadata = {
   title: "Clon de Twitter",
@@ -13,8 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark max-w-[600px] w-full mx-auto">
+    <html lang="en" className="mx-auto w-full max-w-[600px] dark">
       <body>
+        <header>
+          <NavLinks />
+        </header>
         <Providers>{children}</Providers>
       </body>
     </html>
