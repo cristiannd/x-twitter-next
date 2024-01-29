@@ -3,7 +3,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { RefObject } from "react";
 
 const supabase = createServerComponentClient({ cookies });
 

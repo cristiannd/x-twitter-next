@@ -2,11 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import PostCard from "../components/post-card";
 import { cookies } from "next/headers";
 
-interface Params {
-  id: string;
-}
-
-export default async function Post({ params }: { params: Params }) {
+export default async function Post({ params }: { params: { id: string } }) {
   const supabase = await createServerComponentClient({ cookies });
   const postId = params?.id;
 
